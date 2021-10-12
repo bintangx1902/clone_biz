@@ -1,0 +1,85 @@
+{% extends 'admini/base.html' %}
+
+{% block navbar_content %}
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <div class="container-fluid d-flex flex-column p-0">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-text mx-3"><span>Winners Network</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="nav navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin-home' %}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'create-admin' %}"><i class="far fa-plus-square"></i><span>Add New Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'add-cat-admin' %}"><i class="far fa-plus-square"></i><span>Add New Category</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'main-list-admin' %}"><i class="fas fa-pager"></i><span>Main Page List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'cat-list-admin' %}"><i class="fas fa-list-ul"></i><span>Category List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/subpage-list/"><i class="fa fa-gears"></i><span>Sub Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file/upload/"><i class="fa fa-upload"></i><span>Upload File</span></a></li>
+            <li class="nav-item"><a class="nav-link active" href="/wpcp-admin/file-list/"><i class="fas fa-th-list"></i><span>Files List</span></a></li>
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block back_content %}
+<div class="input-group">
+    <a class="btn btn-primary" href="/wpcp-admin/file-list/"><i class="fas fa-arrow-left"></i></a>
+</div>
+{% endblock %}
+
+{% block container_content %}
+
+<div class="row mt-3">
+
+{% for img in object_list %}
+
+<div class="col-md-3 col-lg-3 mb-4">
+    <div class="card border-0">
+        <a href="{{img.file.url}}" target="_blank"><img class="img-fluid rounded-top" src="{{img.file.url}}" alt="Card Image"></a>
+
+        <div class="card-body rounded-bottom" style="background-color: #c8f7c5;">
+            <h6><a id="cop" class="text-info text-decoration-none" target="_blank" download="{{img.file.url}}" href="{{img.file.url}}">
+                Download Image
+                <i class="fas fa-cloud-download-alt"></i> </a></h6>
+            <input type="text" value="{{img.file.url}}" class="form-control form-control-sm my-3" readonly>
+            <div class="d-flex justify-content-end" >
+                <form method="post" action="/wpcp-admin/file/{{img.pk}}/delete/">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger text-dark" ><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+<hr>
+
+{% if is_paginated %}
+
+<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Next"><span aria-hidden="true">«</span></a></li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+        {% if page_obj.has_next %}
+
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+
+        {% endif %}
+
+    </ul>
+</nav>
+
+{% endif %}
+
+{% endblock %}
+
+{% block extra_scripts_content %}
+{% endblock %}

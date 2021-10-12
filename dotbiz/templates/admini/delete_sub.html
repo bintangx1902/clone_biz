@@ -1,0 +1,47 @@
+{% extends 'admini/base.html' %}
+
+{% block title %} Main Page List {% endblock %}
+
+{% block navbar_content %}
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <div class="container-fluid d-flex flex-column p-0">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-text mx-3"><span>Winners Network</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="nav navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin-home' %}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'create-admin' %}"><i class="far fa-plus-square"></i><span>Add New Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'add-cat-admin' %}"><i class="far fa-plus-square"></i><span>Add New Category</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'main-list-admin' %}"><i class="fas fa-pager"></i><span>Main Page List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'cat-list-admin' %}"><i class="fas fa-list-ul"></i><span>Category List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/subpage-list/"><i class="fa fa-gears"></i><span>Sub Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file/upload/"><i class="fa fa-upload"></i><span>Upload Files Here</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file-list/"><i class="fas fa-th-list"></i><span>Files List</span></a></li>
+            <li class="nav-item"><a class="nav-link active"><i class="far fa-window-close"></i><span>Delete</span></a></li>
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block back_content %}
+<div class="input-group">
+    <a class="btn btn-primary" href="/wpcp-admin/page-list/"><i class="fas fa-arrow-left"></i></a>
+</div>
+{% endblock %}
+
+{% block container_content %}
+<h1>Delete Post...</h1>
+		<br/><br/>
+		<h3>Delete: {{ subpage.title }}</h3>
+
+		<br/>
+		<div class="form-group">
+			<form method="POST">
+				{% csrf_token %}
+				<strong>Are you sure?!</strong><br/><br/>
+				<button class="btn btn-secondary">Delete Post!</button>
+            </form>
+		</div>
+{% endblock %}

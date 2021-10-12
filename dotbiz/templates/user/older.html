@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Older Post</title>
+    <link rel="stylesheet" href="/static/older/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="/static/older/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-menu {display: block;}
+
+        .dropdown:hover {background-color: transparent;}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar" style="background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);">
+        <div class="container"><a class="navbar-brand logo" href="/">{{main.brand}}</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav ml-auto">
+                    {% if links %}
+                    {% for link in links %}
+                    <li class="nav-item"><a class="nav-link active" href="{{link.url}}">{{link.name}}</a></li>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if dd_tag %}
+                    {% for dd in dd_tag %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{dd.name}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for link in dd.links.all %}
+                            <a class="dropdown-item" href="{{link.url}}">{{link}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page projets-page">
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-nowrap"></div>
+                    <div class="col-md-6 mt-5">
+                        <div class="text-md-right dataTables_filter" id="dataTable_filter">
+                            <form class="border-right-0 d-none d-sm-inline-block mr-auto my-2 my-md-0 mw-100 navbar-search justify-content-end">
+                                <div class="input-group"><input class="form-control small" type="text" name="q" placeholder="Search for ...">
+                                    <div class="input-group-append"><button class="btn btn-primary py-0 rounded-right" type="button"><i class="fas fa-search"></i></button></div>
+                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-block project-no-images">
+            <div class="container">
+                <div class="heading">
+                    <h2>older post</h2>
+                </div>
+                <div class="row" id="lil">
+                    {% if object_list %}
+                    {% for post in object_list %}
+                    <div class="col-md-6 col-lg-4" >
+                        <div class="project-card-no-image">
+                            <h3 class="text-truncate">{{post.title_tag}}</h3>
+                            <h4 class="text-truncate">{{post.title}}</h4><a class="btn btn-outline-primary btn-sm" role="button" href="{{post.get_absolute_url}}">See More</a>
+                            <div class="tags"><a href="{{post.category.get_absolute_url}}">{{post.category}}</a></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% else %}
+                    <div class="heading">
+                        <h4 class="text-black">Sorry We couldn't find what you were looking for</h4>
+                    </div>
+                    <p class="text-info">Please search with another keyword</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer" style="background-color: #b44fe2!important;">
+        <div class="container">
+            <div class="social-icons mb-3">
+                <a href="#"><i class="icon ion-social-facebook fa-inverse"></i></a>
+                <a href="#"><i class="icon ion-social-instagram-outline"></i></a>
+                <a href="#"><i class="icon ion-social-twitter"></i></a>
+            </div>
+            <p class="text-white copyright my-3">{{main.copyright_content | safe}}</p>
+        </div>
+    </footer>
+    <script src="/static/older/assets/js/jquery.min.js"></script>
+    <script src="/static/older/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="/static/older/assets/js/theme.js"></script>
+    <script>
+        let body, h_4, pls;
+        body = document.getElementById('lil');
+        h_4 = body.getElementsByTagName('h4');
+        for(pls = 0; pls <= h_4.length; pls++) {
+            h_4[pls].innerHTML.replace('<p>', '');
+        }
+    </script>
+</body>
+
+</html>

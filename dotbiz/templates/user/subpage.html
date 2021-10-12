@@ -1,0 +1,133 @@
+{% extends 'user/base1.html' %}
+
+{% block title %} {{post.title_tag}} {% endblock %}
+
+{% block head %}
+    <meta name="keyword" content="{{post.meta_keyword}}" />
+    <meta name="description" content="{{post.meta_description}}" />
+{% endblock %}
+
+
+{% block header_content %}
+    <header class="masthead" style="background-image:url({{post.header_img}});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="post-heading">
+                        <h1>{{post.title}}</h1>
+                        <h2 class="subheading">{{post.quote}}</h2>
+                        <span class="meta">Posted by Bunda Zahra&nbsp;on {{post.update_date | date:"M d, Y - H:i"}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block container_content %}
+            <div class="col-md-10 col-lg-12 mx-auto" id="cont0">
+                <h1 class="font-weight-normal">
+                    Main Page&nbsp;:&nbsp;<a class="text-decoration-none text-primary" href="{{main_title.get_absolute_url}}">{{main_title.title_tag}}</a>
+                </h1>
+            </div>
+            <div class="col-md-10 col-lg-12 mx-auto" id="cont">
+                {{post.body | safe}}
+            </div>
+{% endblock %}
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">404 Not Found</h1>
+    <p class="lead">The Web Page That You Entering is Not Available</p>
+  </div>
+</div>
+
+
+
+
+
+{% block related_content %}
+    <div class="card">
+        <div class="card-header h4">
+            Related
+        </div>
+        {% if sub_page %}
+        <div class="card-body">
+            <div class="row row-cols-2 no-gutters">
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead class="thead-light">
+                            <tr>
+                              <th scope="col" style="text-align: center; vertical-align: middle;">Related Post</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text justify-content-between">
+                            {% for rel_post in related%}
+                            <tr>
+                              <th scope="row" style="text-align: center; vertical-align: middle;"><a class="text-info text-decoration-none" href="{{rel_post.get_absolute_url}}">{{rel_post.title_tag}}</a></th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead class="thead-light">
+                            <tr>
+                              <th scope="col" style="text-align: center; vertical-align: middle;">Sub Post</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sub in sub_page %}
+                            <tr>
+                              <th scope="row" style="text-align: center; vertical-align: middle;"><a class="text-info text-decoration-none" href="{{sub.get_absolute_url}}">{{sub.title}}</a></th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        {% else %}
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Related Post</th>
+                </tr>
+                </thead>
+                <tbody class="text justify-content-between">
+                {% for rel_post in related%}
+                <tr>
+                    <th scope="row" style="text-align: center; vertical-align: middle;"> <a class="text-info text-decoration-none" href="{{rel_post.get_absolute_url}}">{{rel_post.title_tag}}</a> </th>
+                </tr>
+                {% endfor %}
+                {% for rel_post in related2 %}
+                <tr>
+                    <th scope="row" style="text-align: center; vertical-align: middle;"> <a class="text-info text-decoration-none" href="{{rel_post.get_absolute_url}}">{{rel_post.title_tag}}</a> </th>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts_content %}
+    <script type="text/javascript">
+        let con, alink, brr;
+        con = document.getElementById('cont');
+        alink = con.getElementsByTagName('a');
+
+        for (brr = 0; brr <= alink.length; brr++) {
+            alink[brr].className = "text-decoration-none text-primary";
+        }
+    </script>
+{% endblock %}

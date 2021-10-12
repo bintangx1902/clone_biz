@@ -1,0 +1,148 @@
+{% extends 'admini/base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block navbar_content %}
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3"><span>Winners Network</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'edit-index-dashboard' %}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin-edit-index' %}"><i class="far fa-edit"></i><span>Edit Home Page</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin-indexer/add-link/"><i class="far fa-plus-square"></i><span>Add New Url Links</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin-indexer/link-list/"><i class="fas fa-list-ul"></i><span>Links List</span></a></li>
+<!--                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin/subpage-list/"><i class="fa fa-gears"></i><span>Sub Page</span></a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file/upload/"><i class="fa fa-upload"></i><span>Upload Files Here</span></a></li>-->
+                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin-indexer/dropdown-url/"><i class="fas fa-th-list"></i><span>Dropdown URL List</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/wpcp-admin-indexer/dropdown-tag/"><i class="fa fa-gears"></i><span>Dropdown Tag List</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+{% endblock %}
+
+{% block back_content %}
+<div class="input-group">
+    <a class="btn btn-primary" href="/wpcp-admin/"><i class="fas fa-arrow-left"></i> &nbsp; Back To Content Editor</a>
+</div>
+{% endblock %}
+
+{% block container_content %}
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>All Active Page</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{ act_page }}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Total Side Links</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{links}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-info py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Total Dropdown and Links</span></div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="text-dark font-weight-bold h5 mb-0 mr-3"><span>{{ dd_tag }} / {{ dd_content }}</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-warning py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Total Files on System</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{files}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-primary shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Primary</p>
+                                            <p class="text-white-50 small m-0">#4e73df</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-success shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Success</p>
+                                            <p class="text-white-50 small m-0">#1cc88a</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-info shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Info</p>
+                                            <p class="text-white-50 small m-0">#36b9cc</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-warning shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Warning</p>
+                                            <p class="text-white-50 small m-0">#f6c23e</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-danger shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Danger</p>
+                                            <p class="text-white-50 small m-0">#e74a3b</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card text-white bg-secondary shadow">
+                                        <div class="card-body">
+                                            <p class="m-0">Secondary</p>
+                                            <p class="text-white-50 small m-0">#858796</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}

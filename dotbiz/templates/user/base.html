@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/user2/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="/static/admini/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/static/admini/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admini/assets/fonts/fontawesome5-overrides.min.css">
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Bunda Zahra" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="msnbot" content="index,follow" />
+    <meta name="yahoobot" content="index,follow" />
+    <meta name="spiders" content="all" />
+    <meta name="webcrawlers" content="all" />
+    {% block head %}
+    {% endblock %}
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-menu {display: block;}
+
+        .dropdown:hover {background-color: transparent;}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand" href="/">{{main.brand}}</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    {% if links %}
+                    {% for link in links %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{link.url}}">{{link.name}}</a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if dd_tag %}
+                    {% for tag in dd_tag %}
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{tag.name}}
+                        </a>
+                        <div class="dropdown-menu px-2 py-1" aria-labelledby="navbarDropdown">
+                            {% for rel in tag.links.all %}
+                            <a class="dropdown-item" href="{{rel.url}}">{{rel.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block header_content %}
+    {% endblock %}
+
+    {% block upper_content %}
+    {% endblock %}
+
+    <div class="container">
+        <div class="row">
+            {% block container_content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="container" id="cont">
+        {% block related_content %}
+        {% endblock %}
+    </div>
+    <footer class="mt-5" style="background-color: #b44fe2!important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></li>
+                        <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></li>
+                        <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></li>
+                    </ul>
+                    <p class="text-white copyright">{{main.copyright_content | safe}}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/static/user2/assets/js/jquery.min.js"></script>
+    <script src="/static/user2/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/user2/assets/js/clean-blog.js"></script>
+    <script src="/static/user/assets/js/named.js"></script>
+    {% block scripts_content %}
+    {% endblock %}
+</body>
+
+</html>

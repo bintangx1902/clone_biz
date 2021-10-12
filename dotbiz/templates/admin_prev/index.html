@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+
+{% block title %} {{main.title_tag}} {% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block header_content %}
+    <header class="masthead" style="background-image:url({{main.header_img}});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>{{main.title}}</h1><span class="subheading">A Website Writen by <a class="text-decoration-none text-white" href="https://bundazahra.com"> Bunda Zahra </a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+
+{% block upper_content %}
+<div class="container" id="cont">
+        {{main.body_content | safe}}
+</div>
+{% endblock %}
+
+{% block container_content %}
+            <div class="col-md-10 col-lg-8">
+            <p class="h1 font-weight-bold">Latest Post :</p>
+                {% for curent in latest %}
+                <div class="post-preview"><a href="{{curent.get_absolute_url}}">
+                        <h2 class="post-title">{{curent.title}}</h2>
+                        <h3 class="post-subtitle">{{curent.meta_description}}</h3>
+                    </a>
+                    <p class="post-meta text-dark">Posted by&nbsp;<a href="https://bundazahra.com">Bunda Zahra</a> on {{curent.update_date | date:"M d, Y - H:i"}}</p>
+                </div>
+                <hr>
+                {% endfor %}
+                {% for latest in sub_latest %}
+                <div class="post-preview"><a href="{{latest.get_absolute_url}}">
+                        <h2 class="post-title">{{latest.title}}</h2>
+                        <h3 class="post-subtitle">{{latest.meta_description}}</h3>
+                    </a>
+                    <p class="post-meta text-dark">Posted by&nbsp;<a href="https://bundazahra.com">Bunda Zahra</a> on {{latest.update_date | date:"M d, Y - H:i"}}</p>
+                </div>
+                <hr>
+                {% endfor %}
+                <div class="clearfix"><button class="btn btn-primary float-right" type="button">Older Posts&nbsp;⇒</button></div>
+            </div>
+{% endblock %}

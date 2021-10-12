@@ -1,0 +1,61 @@
+{% extends 'user/base.html' %}
+
+{% block title %} {{main.title_tag}} {% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block header_content %}
+    <header class="masthead" style="background-image:url({{main.header_img}});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>{{main.title}}</h1><span class="subheading">A Website Writen by <a class="text-decoration-none text-white" href="https://bundazahra.com"> Bunda Zahra </a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block container_content %}
+            <div class="col-md-10 col-lg-8">
+                <form class="border-right-0 d-none d-sm-inline-block mr-auto my-2 my-md-0 mw-100 navbar-search justify-content-end">
+                    <div class="input-group"><input class="form-control small" type="text" name="q" placeholder="Search for ...">
+                        <div class="input-group-append"><button class="btn btn-primary py-0 rounded-right" type="button"><i class="fas fa-search"></i></button></div>
+                     </div>
+                </form>
+                {% if object_list %}
+                <p class="h1 font-weight-bold">Search Result :</p>
+
+                {% for res in object_list %}
+                <div class="post-preview">
+                    <a href="{{res.get_absolute_url}}">
+                        <h2 class="post-title">{{res.title}}</h2>
+                        <h3 class="post-subtitle">{{res.meta_description}}</h3>
+                    </a>
+                    <p class="post-meta text-dark">Updated {{res.update_date | date:"M d, Y - H:i"}}</p>
+                </div>
+                <hr>
+                {% endfor %}
+                {% else %}
+                <p class="h2 font-weight-bold">Sorry we couldn't find what you were search</p>
+                {% endif %}
+                <div class="clearfix"><button class="btn btn-primary float-right" type="button">Older Posts&nbsp;⇒</button></div>
+            </div>
+{% endblock %}
+
+{% block scripts_content %}
+    <script type="text/javascript">
+        let cont, alink, pls;
+        cont = document.getElementById('contly');
+        alink = cont.getElementsByTagName('a');
+
+        for (pls = 0; pls <= alink.length; pls++) {
+            alink[pls].className = 'text-primary text-decoration-none';
+        }
+    </script>
+{% endblock %}

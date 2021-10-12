@@ -1,0 +1,121 @@
+{% extends 'admin_prev/base.html' %}
+
+{% block title %} {{category.category_tag}} {% endblock %}
+
+{% block head %}
+<meta name="keyword" content="{{category.meta_keyword}}" />
+<meta name="description" content="{{category.meta_description}}" />
+{% endblock %}
+
+
+{% block header_content %}
+    <header class="masthead" style="background-image:url({{post.header_img}});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="post-heading">
+                        <h1>{{category.title}}</h1>
+                        <h2 class="subheading">{{category.quote}}</h2>
+                        <span class="meta">Posted by Bunda Zahra&nbsp;on {{category.update_date | date:"M d, Y - H:i"}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block container_content %}
+            <div class="col-md-10 col-lg-12 mx-auto">
+                <h1 class="font-weight-normal" style="font-family: 'Times New Roman'">Category : <a href="/wpcp-admin/category/{{cat.category_link}}/preview/" class="text-primary text-decoration-none">{{cat}}</a></h1>
+            </div>
+            <div class="col-md-10 col-lg-12 mx-auto" id="cont">
+            {{category.category_content | safe}}
+            </div>
+
+{% endblock %}
+
+{% block related_content %}
+    <div class="card">
+        <div class="card-header h4">
+            Related
+        </div>
+        {% if sub_page %}
+        <div class="card-body">
+            <div class="row row-cols-2 no-gutters">
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead class="thead-light">
+                            <tr>
+                              <th scope="col" style="text-align: center; vertical-align: middle;">Related Post</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text justify-content-between">
+                            {% for rel_post in related%}
+                            <tr>
+                              <th scope="row" style="text-align: center; vertical-align: middle;"><a class="text-info text-decoration-none" href="/wpcp-admin/page/{{rel_post.page_link}}/preview/">{{rel_post.title_tag}}</a></th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead class="thead-light">
+                            <tr>
+                              <th scope="col" style="text-align: center; vertical-align: middle;">Sub Post</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sub in sub_page %}
+                            <tr>
+                              <th scope="row" style="text-align: center; vertical-align: middle;"><a class="text-info text-decoration-none" href="/wpcp-admin/subpage/{{sub.page_link}}/preview/">{{sub.title}}</a></th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        {% else %}
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Related Post</th>
+                </tr>
+                </thead>
+                <tbody class="text justify-content-between">
+                {% for rel_post in related%}
+                <tr>
+                    <th scope="row" style="text-align: center; vertical-align: middle;"> <a class="text-info text-decoration-none" href="/wpcp-admin/page/{{rel_post.page_link}}/preview">{{rel_post.title_tag}}</a> </th>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+    <a class="btn btn-primary col-md-10 col-lg-12 mx-auto mt-3" href="{{category.get_absolute_url}}">Preview as User</a>
+{% endblock %}
+
+{% block scripts_content %}
+    <script type="text/javascript">
+        var con, alink, brr, br;
+        con = document.getElementById('cont');
+        alink = con.getElementsByTagName('a');
+        // aimg = con.getElementsByTagName('img');
+
+        for (brr = 0; brr <= alink.length; brr++) {
+            alink[brr].className = "text-decoration-none text-primary";
+        }
+
+        // for (br = 0; br <= aimg.length; br++) {
+            // aimg[br].className = "img-fluid";
+        // //}
+    </script>
+{% endblock %}

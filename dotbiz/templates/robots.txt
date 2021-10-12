@@ -1,0 +1,21 @@
+User-agent: *
+Disallow: /wpcp-admin/
+Disallow: /wpcp-admin/login
+Disallow: /wpcp-admin/register
+Disallow: /wpcp-admin/page/
+Disallow: /wpcp-admin/category/
+Disallow: /wpcp-admin/subpage/
+Disallow: /wpcp-admin/logout/
+Disallow: /wpcp-admin/page-list/
+Disallow: /wpcp-admin/create-main-page/
+Disallow: /wpcp-admin/add-category/
+Disallow: /wpcp-admin/subpage-list/
+Disallow: /wpcp-admin/file/upload/
+Disallow: /wpcp-admin/file-list/
+Disallow: /wpcp-admin/file/
+Disallow: /wpcp-admin/testing
+Allow: /sub/
+Allow: /category/
+Allow: /
+
+sitemap: https://[domain_name.domain]/sitemap.xml

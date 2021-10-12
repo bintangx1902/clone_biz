@@ -1,0 +1,51 @@
+{% extends 'admini/base.html' %} 
+
+{% block title %} Edit Page {% endblock %}
+
+{% block navbar_content %}
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <div class="container-fluid d-flex flex-column p-0">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-text mx-3"><span>Winners Network</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="nav navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin-home' %}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'create-admin' %}"><i class="far fa-plus-square"></i><span>Add New Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'add-cat-admin' %}"><i class="far fa-plus-square"></i><span>Add New Category</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'main-list-admin' %}"><i class="fas fa-pager"></i><span>Main Page List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'cat-list-admin' %}"><i class="fas fa-list-ul"></i><span>Category List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/subpage-list/"><i class="fa fa-gears"></i><span>Sub Page</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file/upload/"><i class="fa fa-upload"></i><span>Upload Files Here</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/wpcp-admin/file-list/"><i class="fas fa-th-list"></i><span>Files List</span></a></li>
+            <li class="nav-item"><a class="nav-link active"><i class="fas fa-edit"></i><span>Edit Sub Page</span></a></li>
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block back_content %}
+<div class="input-group">
+    <a class="btn btn-primary" href="/wpcp-admin/page-list/"><i class="fas fa-arrow-left"></i></a>
+</div>
+{% endblock %}
+
+{% block container_content %}
+<form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+			{{ form.media }}
+			{{ form.as_p }}
+    <div class="form-group">
+        <button class="btn btn-primary"> Save </button>
+    </div>
+</form>
+{% endblock %}
+
+{% block extra_scripts_content %}
+    <script type="text/javascript">
+
+        document.getElementById('user_id').style.display = "none";
+
+    </script>
+{% endblock%}
